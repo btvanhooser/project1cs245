@@ -26,8 +26,8 @@ public class GameScreen  extends JFrame {
     
     public GameScreen() {
         controller = new Keyboard();
-        model = new Hangman(controller);
-        view = new GameView(model);
+        view = new GameView(controller);
+        model = new Hangman(view, controller);
         
         setFrameAttributes();
     }

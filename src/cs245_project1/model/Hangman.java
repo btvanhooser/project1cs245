@@ -11,24 +11,37 @@
 package cs245_project1.model;
 
 import cs245_project1.controller.Keyboard;
+import cs245_project1.view.GameView;
+import java.awt.event.ActionEvent;
+import javax.swing.JButton;
 
 /**
  * 
  */
 public class Hangman {
     
+    GameView view;
     Keyboard controller;
     
-    public Hangman(Keyboard controller) {
+    public Hangman(GameView view, Keyboard controller) {
         this.controller = controller;
+        this.view = view;
+        addActionListenersToKeyboardButtons();
     }
     
-    public void update() {
-        
+    
+    public void update(String buttonText) {
+        view.update(buttonText);
     }
     
-    public Keyboard getController() {
-        return controller;
+    
+    private void addActionListenersToKeyboardButtons() {
+        for (JButton button : controller.keyList) {
+            button.addActionListener((ActionEvent e) -> {
+                update(button.getText());
+                button.setEnabled(false);
+            });
+        }
     }
     
 }

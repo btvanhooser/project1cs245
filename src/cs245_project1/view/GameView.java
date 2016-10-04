@@ -10,7 +10,6 @@
 package cs245_project1.view;
 
 import cs245_project1.controller.Keyboard;
-import cs245_project1.model.Hangman;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
@@ -22,18 +21,16 @@ import javax.swing.JTextArea;
 public class GameView extends JPanel {
     
     /* --- Variables --- */
-    private JPanel hangman;
-    private JPanel keyboard;
+    private JPanel hangmanPanel;
+    private JPanel keyboardPanel;
     private JTextArea testUpdate;
-    private Hangman model;
     private Keyboard controller;
     
     public String updateString = "";
     
    
-    public GameView(Hangman model) {
-        this.model = model;
-        controller = model.getController();
+    public GameView(Keyboard controller) {
+        this.controller = controller;
         
 
         createHangmanPanel();
@@ -41,8 +38,8 @@ public class GameView extends JPanel {
         setPanelAttributes();
     }
  
-    public void update() {
-        testUpdate.setText(updateString);
+    public void update(String buttonText) {
+        testUpdate.setText(buttonText);
     }
     
     
@@ -50,22 +47,22 @@ public class GameView extends JPanel {
     
     private void setPanelAttributes() {
         setLayout(new BorderLayout());
-        add(keyboard,BorderLayout.SOUTH);
-        add(hangman,BorderLayout.NORTH);
+        add(keyboardPanel,BorderLayout.SOUTH);
+        add(hangmanPanel,BorderLayout.NORTH);
         
     }
     
     private void createHangmanPanel() {
         testUpdate = new JTextArea("HANGMAN");
-        hangman = new JPanel();
-        hangman.add(testUpdate);
+        hangmanPanel = new JPanel();
+        hangmanPanel.add(testUpdate);
     }
     
     private void createKeyboardPanel() {
-        keyboard = new JPanel();
-        keyboard.setLayout(new GridLayout(2,13,5,5));
+        keyboardPanel = new JPanel();
+        keyboardPanel.setLayout(new GridLayout(2,13,5,5));
         for (int ii = 0; ii < controller.getSize(); ++ii ) {
-            keyboard.add(controller.keyList.get(ii));
+            keyboardPanel.add(controller.keyList.get(ii));
         }
     }
 }
