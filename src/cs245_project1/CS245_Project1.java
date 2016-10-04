@@ -1,22 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/***************************************************************
+* file: CS245_Project1.java
+* @author: Andrew Olaveson
+* @author: Melanie Giusti
+* @author: Brian Van Hooser
+* @author: Alfredo Ceballos
+* class: CS 245.01 – Programming Graphical User Interfaces
+*
+* date last modified:
+* purpose: 
+****************************************************************/
 package cs245_project1;
+import cs245_project1.screens.GameScreen;
 
 /**
  *
- * @author Brian
  */
 public class CS245_Project1 {
-
-    /**
-     * @param args the command line arguments
-     */
+    static GameScreen startScreen;
+    
     public static void main(String[] args) {
-        
-        System.out.println("TEST Upload");
+        startScreen = new GameScreen();
     }
     
 }

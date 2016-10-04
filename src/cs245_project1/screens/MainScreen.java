@@ -7,8 +7,8 @@ package cs245_project1.screens;
 
 /**
  *
- * @author andrew
  */
 public class MainScreen {
     
+
 }
