@@ -24,15 +24,19 @@ public class Keyboard {
     private final int LAST_LETTER = 90;
     
     /* --- Variables --- */
-    public LinkedList<JButton> keyList = new LinkedList<>();
+    public LinkedList<JButton> keyList;
     
     
     public Keyboard() {
         super();
+        keyList = new LinkedList<>();
         populateVirtualKeyboard();
     }
     
     public int getSize() { return keyList.size(); }
+    public LinkedList<JButton> getKeyboardList() {
+        return keyList;
+    }
     
     
     /* --- Helper Methods --- */

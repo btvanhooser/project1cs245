@@ -12,12 +12,14 @@ package cs245_project1.view;
 import cs245_project1.controller.Keyboard;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -30,74 +32,76 @@ import javax.swing.Timer;
  */
 public class GameView extends JPanel {
     
+    /* --- Constants --- */
+    private final Keyboard controller;
+    
     /* --- Variables --- */
     private JPanel hangmanPanel;
     private JPanel keyboardPanel;
-    private JPanel northPanel;
+    private JPanel headerPanel;
+    private JPanel wordPanel;
+    private JLabel scoreLabel;
+    private JLabel headerLabel;
     private JLabel clockTextArea;
     private JTextArea testUpdate;
     private JButton skipButton;
-    private final Keyboard controller;
-    DateFormat dateFormat;
-    Date time;
-    Timer timer;
+    
+    private LinkedList <JLabel> currentWordList;
+    private String currentWord;
+    private DateFormat dateFormat;
+    private Date time;
+    private Timer timer;
     
    
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public GameView(Keyboard controller) {
         this.controller = controller;
+        createWordPanel();
         createHangmanPanel();
         createKeyboardPanel();
-        createSkipButton();
-        createClock();
-        updateClock();
-        setPanelAttributes();
+        createHeaderPanelItems();
+        startClock();
+        addPanels();
     }
  
     //MHG
     public void update(String wordState, int wrongGuesses, int score) {
+        currentWord = wordState;
         testUpdate.setText("wordState: " + wordState + " wrongGuesses: " + wrongGuesses + " score: " + score);
+        updateScore(Integer.toString(score));
+        updateWord();
     }
     
-    //MHG - DEPRECATED
-    /*public void update(String buttonText) {
-        testUpdate.setText(buttonText);
-    }*/
-    
-    
+
     /* --- Helper Methods --- */
     
-    private void setPanelAttributes() {
+    private void addPanels() {
         setLayout(new BorderLayout());
         add(keyboardPanel,BorderLayout.SOUTH);
         add(hangmanPanel,BorderLayout.CENTER);
-        northPanel = new JPanel();
-        northPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-        northPanel.setLayout(new GridLayout(2,5));
-        northPanel.add(clockTextArea);
-        northPanel.add(new JLabel(""));
-        northPanel.add(new JLabel(""));
-        northPanel.add(new JLabel("HANGMAN"));
-        northPanel.add(new JLabel(""));
-        northPanel.add(new JLabel(""));
-        northPanel.add(new JLabel(""));
-        northPanel.add(new JLabel(" Score: ---"));
-        northPanel.add(new JLabel(""));
-        northPanel.add(new JLabel(""));
-        northPanel.add(new JLabel(""));
-        northPanel.add(new JLabel(""));
-        northPanel.add(new JLabel(""));
-        northPanel.add(skipButton);
-        add(northPanel,BorderLayout.NORTH);
+        headerPanel = new JPanel();
+        headerPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        headerPanel.setLayout(new GridLayout(0,5));
+
+        headerPanel.add(clockTextArea);
+        headerPanel.add(new JLabel());
+        headerPanel.add(headerLabel);
+        headerPanel.add(new JLabel());
+        headerPanel.add(new JLabel());
+        headerPanel.add(scoreLabel);
+        headerPanel.add(new JLabel());
+        headerPanel.add(new JLabel());
+        headerPanel.add(new JLabel());
+        headerPanel.add(skipButton);
+
+        add(headerPanel,BorderLayout.NORTH);
     }
     
     private void createHangmanPanel() {
         hangmanPanel = new JPanel();
-        hangmanPanel.setSize(600, 300);
         hangmanPanel.setBorder(BorderFactory.createLineBorder(Color.black));
         testUpdate = new JTextArea();
-        hangmanPanel.add(testUpdate);
-       
+        hangmanPanel.add(wordPanel);
     }
     
     private void createKeyboardPanel() {
@@ -109,24 +113,44 @@ public class GameView extends JPanel {
         }
     }
     
-    private void createSkipButton() {
+    private void createHeaderPanelItems() {
+        headerLabel = new JLabel("HANGMAN");
+        scoreLabel = new JLabel(" Score: ---");
+        
         skipButton = new JButton("Skip");
         skipButton.setMargin(new Insets(1,1,1,1));
-    }
-    
-    private void createClock() {
+        
         dateFormat = new SimpleDateFormat("HH:mm:ss");
         clockTextArea = new JLabel(dateFormat.format(new Date()));
     }
+    
+    private void createWordPanel() {
+        currentWord = "---";
+        wordPanel = new JPanel();
+        wordPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        currentWordList = new LinkedList<>();
+
+        updateWord();
+    }
         
-    public void updateClock() {
+    private void startClock() {
         timer = new Timer(1000, (ActionEvent e) -> {
             clockTextArea.setText(dateFormat.format(new Date()));
         });
         timer.start();
     }
     
-    public void updateScore() {
-        
+    private void updateScore(String score) {
+        scoreLabel.setText(" Score: "+ score);
+    }
+    
+    private void updateWord() {
+        wordPanel.removeAll();
+
+        for (int ii = 0; ii < currentWord.length(); ++ii) {
+            currentWordList.add(new JLabel(currentWord.charAt(ii)+ " "));
+            wordPanel.add(currentWordList.get(ii));
+            currentWordList.get(ii).setText(currentWord.charAt(ii) + " ");
+        }
     }
 }
