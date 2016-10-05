@@ -13,6 +13,7 @@ import cs245_project1.controller.Keyboard;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -24,7 +25,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.Timer;
 
 /**
@@ -39,17 +39,16 @@ public class GameView extends JPanel {
     private JPanel hangmanPanel;
     private JPanel keyboardPanel;
     private JPanel headerPanel;
+    private JPanel manPanel;
     private JPanel wordPanel;
     private JLabel scoreLabel;
     private JLabel headerLabel;
     private JLabel clockTextArea;
-    private JTextArea testUpdate;
     private JButton skipButton;
     
     private LinkedList <JLabel> currentWordList;
     private String currentWord;
     private DateFormat dateFormat;
-    private Date time;
     private Timer timer;
     
    
@@ -67,7 +66,6 @@ public class GameView extends JPanel {
     //MHG
     public void update(String wordState, int wrongGuesses, int score) {
         currentWord = wordState;
-        testUpdate.setText("wordState: " + wordState + " wrongGuesses: " + wrongGuesses + " score: " + score);
         updateScore(Integer.toString(score));
         updateWord();
     }
@@ -99,9 +97,12 @@ public class GameView extends JPanel {
     
     private void createHangmanPanel() {
         hangmanPanel = new JPanel();
+        manPanel     = new JPanel();
+        drawNoose();
         hangmanPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-        testUpdate = new JTextArea();
-        hangmanPanel.add(wordPanel);
+        hangmanPanel.setLayout(new BorderLayout());
+        hangmanPanel.add(manPanel,BorderLayout.CENTER);
+        hangmanPanel.add(wordPanel,BorderLayout.SOUTH);
     }
     
     private void createKeyboardPanel() {
@@ -122,6 +123,15 @@ public class GameView extends JPanel {
         
         dateFormat = new SimpleDateFormat("HH:mm:ss");
         clockTextArea = new JLabel(dateFormat.format(new Date()));
+    }
+    
+    private void drawNoose() {
+
+    }
+    
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        
     }
     
     private void createWordPanel() {
