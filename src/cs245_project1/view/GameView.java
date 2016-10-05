@@ -38,9 +38,16 @@ public class GameView extends JPanel {
         setPanelAttributes();
     }
  
-    public void update(String buttonText) {
-        testUpdate.setText(buttonText);
+    //MHG
+    public void update(String wordState, int wrongGuesses, int score) {
+        testUpdate.setText("wordState: " + wordState + " wrongGuesses: " + wrongGuesses + " score: " + score);
     }
+    
+    //MHG - DEPRECATED
+    /*public void update(String buttonText) {
+        testUpdate.setText(buttonText);
+    }*/
+        
     
     
     /* --- Helper Methods --- */
@@ -56,6 +63,7 @@ public class GameView extends JPanel {
         testUpdate = new JTextArea("HANGMAN");
         hangmanPanel = new JPanel();
         hangmanPanel.add(testUpdate);
+       
     }
     
     private void createKeyboardPanel() {
