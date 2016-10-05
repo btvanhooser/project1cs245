@@ -15,9 +15,6 @@ import cs245_project1.view.GameView;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 
-/**
- * 
- */
 public class Hangman {
     
     /*Variables*/
@@ -30,6 +27,7 @@ public class Hangman {
     
     /*Constants*/
     private final int    MAX_SCORE        = 100;
+    private final int    MAX_TRYS         = 6;
     private final int    POINTS_TO_DEDUCT = 10;
     private final String WORD_LIST []     = {"ABSTRACT","CEMETERY","NURSE",
                                              "PHARMACY","CLIMBING"};
@@ -49,6 +47,8 @@ public class Hangman {
         
         for(int i = 0; i < guessWord.length(); i++){wordState = wordState.append("_");}
         
+        view.update(wordState.toString(),wrongGuesses,score);
+        
     }
     
     /*Updates game state based upon letter guessed*/
@@ -64,8 +64,11 @@ public class Hangman {
             }
         }
         else{                               // Otherwise decrement the score
-            score -= POINTS_TO_DEDUCT;
             wrongGuesses++;
+            
+            if(wrongGuesses <= MAX_TRYS){
+                score -= POINTS_TO_DEDUCT;
+            }
         }
         
         view.update(wordState.toString(),wrongGuesses,score);
