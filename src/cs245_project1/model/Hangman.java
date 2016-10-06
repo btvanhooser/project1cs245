@@ -64,9 +64,8 @@ public class Hangman {
             }
         }
         else{                               // Otherwise decrement the score
-            wrongGuesses++;
-            
-            if(wrongGuesses <= MAX_TRYS){
+            if(wrongGuesses < MAX_TRYS){
+                wrongGuesses++;
                 score -= POINTS_TO_DEDUCT;
             }
         }
