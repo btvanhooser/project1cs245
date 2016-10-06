@@ -12,7 +12,7 @@
 package cs245_project1.controller;
 import cs245_project1.screens.GameScreen;
 import cs245_project1.screens.MainFrame;
-import cs245_project1.view.SplashScreen;
+import cs245_project1.screens.SplashScreen;
 import java.awt.event.ActionEvent;
 import java.util.Date;
 import javax.swing.SwingUtilities;
