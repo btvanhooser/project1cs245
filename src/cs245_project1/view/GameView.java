@@ -15,7 +15,6 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -25,7 +24,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -50,7 +48,6 @@ public class GameView extends JPanel {
     private JTextArea manBuffer;
     private JLabel headerLabel;
     private JLabel clockTextArea;
-    private JButton skipButton;
     
     private String [] hangmanParts;
     private LinkedList <JLabel> currentWordList;
@@ -98,7 +95,7 @@ public class GameView extends JPanel {
         headerPanel.add(new JLabel());
         headerPanel.add(new JLabel());
         headerPanel.add(new JLabel());
-        headerPanel.add(skipButton);
+        headerPanel.add(controller.getSkipButton());
 
         add(headerPanel,BorderLayout.NORTH);
     }
@@ -151,10 +148,6 @@ public class GameView extends JPanel {
     private void createHeaderPanelItems() {
         headerLabel = new JLabel("HANGMAN");
         scoreLabel = new JLabel(" Score: ---");
-        
-        skipButton = new JButton("Skip");
-        skipButton.setMargin(new Insets(1,1,1,1));
-        
         dateFormat = new SimpleDateFormat("HH:mm:ss");
         clockTextArea = new JLabel(dateFormat.format(new Date()));
     }

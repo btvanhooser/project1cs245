@@ -11,6 +11,8 @@
 package cs245_project1.model;
 
 import cs245_project1.controller.Keyboard;
+import cs245_project1.screens.EndScreen;
+import cs245_project1.screens.GameScreen;
 import cs245_project1.view.GameView;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
@@ -18,6 +20,7 @@ import javax.swing.JButton;
 public class Hangman {
     
     /*Variables*/
+    GameScreen game;
     GameView               view;
     Keyboard               controller;
     private  String        guessWord;
@@ -33,11 +36,11 @@ public class Hangman {
                                              "PHARMACY","CLIMBING"};
     
     /* Model constructor*/
-    public Hangman(GameView view, Keyboard controller) {
-        
+    public Hangman(GameView view, Keyboard controller, GameScreen game) {
+        this.game = game;
         this.controller = controller;
         this.view = view;
-        addActionListenersToKeyboardButtons();
+        addActionListenersToControllerButtons();
         
         // Set initial game state
         score        = MAX_SCORE;
@@ -49,6 +52,11 @@ public class Hangman {
         
         view.update(wordState.toString(),wrongGuesses,score);
         
+    }
+    
+    /*Returns a random word from our word list*/
+    private String getRandomWord(){
+        return WORD_LIST[(int)(Math.random()*WORD_LIST.length)];
     }
     
     /*Updates game state based upon letter guessed*/
@@ -71,10 +79,29 @@ public class Hangman {
         }
         
         view.update(wordState.toString(),wrongGuesses,score);
+        checkWin();
+    }
+    
+    /*Ends game and goes to "End Game" screen*/
+    private void endGame(int score){
+        EndScreen end = new EndScreen(score, game);
+        game.dispose();
+    }
+    
+    /*Checks for a win or loss*/
+    private void checkWin(){
+        if(wrongGuesses >= MAX_TRYS || !wordState.toString().contains("_")){
+            endGame(score);
+        }
     }
     
     /* Adds action listeners to our virtual keyboard*/
-    private void addActionListenersToKeyboardButtons() {
+    private void addActionListenersToControllerButtons() {
+        
+        controller.getSkipButton().addActionListener((ActionEvent e) ->{
+            score = 0;
+            endGame(score);
+        });
         
         for (JButton button : controller.keyList) {
             button.addActionListener((ActionEvent e) -> {
@@ -84,9 +111,6 @@ public class Hangman {
         }
     }
     
-    /*Returns a random word from our word list*/
-    private String getRandomWord(){
-        return WORD_LIST[(int)(Math.random()*WORD_LIST.length)];
-    }
+    
     
 }

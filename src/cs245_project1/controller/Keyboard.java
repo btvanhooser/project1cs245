@@ -25,12 +25,12 @@ public class Keyboard {
     
     /* --- Variables --- */
     public LinkedList<JButton> keyList;
-    
+    private JButton skipButton;
     
     public Keyboard() {
         super();
         keyList = new LinkedList<>();
-        populateVirtualKeyboard();
+        populateControllerButtons();
     }
     
     public int getSize() { return keyList.size(); }
@@ -41,7 +41,11 @@ public class Keyboard {
     
     /* --- Helper Methods --- */
     
-    private void populateVirtualKeyboard() {
+    public  JButton getSkipButton(){return skipButton;}
+    
+    private void populateControllerButtons() {
+        skipButton = new JButton("Skip");
+        skipButton.setMargin(new Insets(1,1,1,1));
         for (int ii = FIRST_LETTER; ii <= LAST_LETTER; ++ii) {
             keyList.add(new JButton(Character.toString((char)ii)));
             keyList.get(ii - FIRST_LETTER).setMargin(new Insets(1,1,1,1));
