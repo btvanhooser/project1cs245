@@ -11,20 +11,40 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-/**
- *
- * @author Brian
- */
+/***************************************************************
+* file: HighScorePanel.java
+* author: Brian Van Hooser
+* class: CS 245 - Intro to GUI
+*
+* assignment: Project 1 (Hangman)
+* date last modified: 10/6/2016
+*
+* purpose: This is the Panel that provides the list of high scores.
+* This list is currently static, but will later be adjusted for
+* actual data.
+*
+****************************************************************/
+
 public class HighScorePanel extends JPanel implements ActionListener {
     
     private ButtonListener btnListener;
     /**
      * Creates new form HighScorePanel
      */
+    
+    // Method: HighScorePanel
+    // Purpose: This is the constructor that calls the generated code 
+    // for the Panel content, and then adds a listener to the button.
+    
     public HighScorePanel() {
         initComponents();
         backButton.addActionListener(this);
     }
+    
+    // Method: setButtonListener
+    // Purpose: This method is to allow the passing of the correct implementation
+    // of the ButtonListener interface. This assists in correctly switching panels
+    // within the one MainFrame class.
     
     public void setButtonListener(ButtonListener listener){
         this.btnListener = listener;
@@ -138,6 +158,12 @@ public class HighScorePanel extends JPanel implements ActionListener {
     // End of variables declaration//GEN-END:variables
 
     @Override
+    
+    // Method: actionPerformed
+    // Purpose: This method handled the scenario where a button 
+    // is clicked. This returns a set string depending on which 
+    // button ends up being clicked.
+    
     public void actionPerformed(ActionEvent e) {
         JButton clicked = (JButton) e.getSource();
         

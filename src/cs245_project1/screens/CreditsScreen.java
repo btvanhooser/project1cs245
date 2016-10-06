@@ -11,20 +11,40 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-/**
- *
- * @author Brian
- */
+/***************************************************************
+* file: CreditsScreen.java
+* author: Alfredo Ceballos
+* class: CS 245 - Intro to GUI
+*
+* assignment: Project 1 (Hangman)
+* date last modified: 10/6/2016
+*
+* purpose: This is the JPanel that is used to handle the format
+* and content of the Credits Screen. This is able to switch back
+* and forth between the MainScreen and this page through the 
+* MainFrame.
+*
+****************************************************************/
 public class CreditsScreen extends JPanel implements ActionListener {
 
     private ButtonListener btnListener;
     /**
      * Creates new form CreditsScreen
      */
+    
+    // Method: CreditsScreen
+    // Purpose: This is the constructor that calls the generated code 
+    // for the Panel content, and then adds a listener to the button.
+    
     public CreditsScreen() {
         initComponents();
         jButton1.addActionListener(this);
     }
+    
+    // Method: setButtonListener
+    // Purpose: This method is to allow the passing of the correct implementation
+    // of the ButtonListener interface. This assists in correctly switching panels
+    // within the one MainFrame class.
     
     public void setButtonListener(ButtonListener listener){
         this.btnListener = listener;
@@ -114,6 +134,12 @@ public class CreditsScreen extends JPanel implements ActionListener {
     }// </editor-fold>//GEN-END:initComponents
 
     @Override
+    
+    // Method: actionPerformed
+    // Purpose: This method handled the scenario where a button 
+    // is clicked. This returns a set string depending on which 
+    // button ends up being clicked.
+    
     public void actionPerformed(ActionEvent e) {
         JButton clicked = (JButton) e.getSource();
         

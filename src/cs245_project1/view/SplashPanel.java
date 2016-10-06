@@ -5,15 +5,30 @@
  */
 package cs245_project1.view;
 
-/**
- *
- * @author Brian
- */
+/***************************************************************
+* file: SplashPanel.java
+* author: Brian Van Hooser
+* class: CS 245 - Intro to GUI
+*
+* assignment: Project 1 (Hangman)
+* date last modified: 10/6/2016
+*
+* purpose: This Panel is designed to contain the program name and
+* our team name which is current displayed as our logo. This panel
+* is exclusively handled by the SplashScreen frame.
+*
+****************************************************************/
+
 public class SplashPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form SplashPanel
      */
+    
+    // Method: SplashPanel
+    // Purpose: This is the constructor that calls the generated code 
+    // for the Panel content.
+    
     public SplashPanel() {
         initComponents();
     }

@@ -11,10 +11,19 @@ import cs245_project1.view.MainScreen;
 import java.awt.FlowLayout;
 import javax.swing.JFrame;
 
-/**
- *
- * @author Brian
- */
+/***************************************************************
+* file: MainFrame.java
+* author: Brian Van Hooser
+* class: CS 245 - Intro to GUI
+*
+* assignment: Project 1 (Hangman)
+* date last modified: 10/6/2016
+*
+* purpose: This is the main JFrame that all files are linked to
+* with the exception of the hangman game, which has its own 
+* frame included.
+*
+****************************************************************/
 public class MainFrame extends JFrame {
     static GameScreen startScreen;
     private MainScreen mainScreen;
@@ -23,6 +32,12 @@ public class MainFrame extends JFrame {
     /**
      * Creates new form MainFrame
      */
+    
+    // Method: MainFrame
+    // Purpose: This is the method for the Main Frame that will handle initializing all
+    // panels that will be used, as well as starting up all of the desired frame settings.
+    // Most importantly, this also sets up the listeners for the panels attached to it.
+    
     public MainFrame() {
         super("Hangman");
         setLayout(new FlowLayout());

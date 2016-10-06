@@ -1,21 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cs245_project1.screens;
 
 import cs245_project1.view.SplashPanel;
 
-/**
- *
- * @author Brian
- */
+/***************************************************************
+* file: SplashScreen.java
+* author: Brian Van Hooser and Alfredo Ceballos
+* class: CS 245 - Intro to GUI
+*
+* assignment: Project 1 (Hangman)
+* date last modified: 10/6/2016
+*
+* purpose: This is the Frame that will contain and manage the
+* SplashPanel class.
+*
+****************************************************************/
 public class SplashScreen extends javax.swing.JFrame {
 
     /**
      * Creates new form SplashScreen
      */
+    
+    // Method: SplashScreen
+    // Purpose: This is the constructor that calls the generated code 
+    // for the Frame content, and then sets the desired frame settings.
+    
     public SplashScreen() {
         initComponents();
         setContentPane(new SplashPanel());

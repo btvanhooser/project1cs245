@@ -11,16 +11,31 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-/**
- *
- * @author Brian
- */
+/***************************************************************
+* file: MainScreen.java
+* author: Brian Van Hooser
+* class: CS 245 - Intro to GUI
+*
+* assignment: Project 1 (Hangman)
+* date last modified: 10/6/2016
+*
+* purpose: This Panel handles the display of our logo, as well as
+* the three function buttons which are responsible for launching 
+* the game, displaying the high scores, and presenting the credits
+*
+****************************************************************/
+
 public class MainScreen extends JPanel implements ActionListener{
 
     private ButtonListener btnListener;
     /**
      * Creates new form MainScreen
      */
+    
+    // Method: MainScreen
+    // Purpose: This is the constructor that calls the generated code 
+    // for the Panel content, and then adds the listeners to each button.
+    
     public MainScreen() {
         initComponents();
         playButton.addActionListener(this);
@@ -28,6 +43,11 @@ public class MainScreen extends JPanel implements ActionListener{
         creditsButton.addActionListener(this);
     }
 
+    // Method: setButtonListener
+    // Purpose: This method is to allow the passing of the correct implementation
+    // of the ButtonListener interface. This assists in correctly switching panels
+    // within the one MainFrame class.
+    
     public void setButtonListener(ButtonListener listener){
         this.btnListener = listener;
     }
@@ -99,6 +119,12 @@ public class MainScreen extends JPanel implements ActionListener{
     // End of variables declaration//GEN-END:variables
 
     @Override
+    
+    // Method: actionPerformed
+    // Purpose: This method handled the scenario where a button 
+    // is clicked. This returns a set string depending on which 
+    // button ends up being clicked.
+    
     public void actionPerformed(ActionEvent e) {
         JButton clicked = (JButton) e.getSource();
         if (btnListener != null){

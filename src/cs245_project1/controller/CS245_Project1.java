@@ -6,8 +6,10 @@
 * @author: Alfredo Ceballos
 * class: CS 245.01 – Programming Graphical User Interfaces
 *
-* date last modified:
-* purpose: 
+* date last modified: 10/6/2016
+* purpose: This is the file that contains the 'main' method which
+* handles the usage of the SplashScreen, and then launches the 
+* MainFrame after a set time.
 ****************************************************************/
 package cs245_project1.controller;
 import cs245_project1.screens.GameScreen;
@@ -22,6 +24,9 @@ import javax.swing.Timer;
  *
  */
 public class CS245_Project1 {
+    
+    // Method: main
+    // Purpose: This is the starting point for this project.
     
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable(){
