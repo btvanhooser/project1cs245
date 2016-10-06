@@ -38,26 +38,32 @@ public class HighScorePanel extends javax.swing.JPanel {
         Header.setEditable(false);
         Header.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         Header.setText("High Scores");
+        Header.setBorder(null);
 
         highScore1.setEditable(false);
         highScore1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         highScore1.setText("PL1...100");
+        highScore1.setBorder(null);
 
         highScore2.setEditable(false);
         highScore2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         highScore2.setText("PL2...100");
+        highScore2.setBorder(null);
 
         highScore4.setEditable(false);
         highScore4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         highScore4.setText("PL4...100");
+        highScore4.setBorder(null);
 
         highScore3.setEditable(false);
         highScore3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         highScore3.setText("PL3...100");
+        highScore3.setBorder(null);
 
         highScore5.setEditable(false);
         highScore5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         highScore5.setText("PL5...100");
+        highScore5.setBorder(null);
 
         backButton.setText("Back");
 
@@ -101,7 +107,7 @@ public class HighScorePanel extends javax.swing.JPanel {
                 .addComponent(highScore4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(highScore5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addComponent(backButton)
                 .addContainerGap())
         );
