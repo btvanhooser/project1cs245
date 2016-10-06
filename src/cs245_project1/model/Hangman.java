@@ -18,22 +18,22 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 
 public class Hangman {
-    
-    /*Variables*/
-    GameScreen game;
-    GameView               view;
-    Keyboard               controller;
-    private  String        guessWord;
-    private  StringBuilder wordState;
-    private  int           wrongGuesses;
-    private  int           score;
-    
+
     /*Constants*/
     private final int    MAX_SCORE        = 100;
     private final int    MAX_TRYS         = 6;
     private final int    POINTS_TO_DEDUCT = 10;
     private final String WORD_LIST []     = {"ABSTRACT","CEMETERY","NURSE",
                                              "PHARMACY","CLIMBING"};
+    
+    /*Variables*/
+    GameScreen             game;
+    GameView               view;
+    Keyboard               controller;
+    private  String        guessWord;
+    private  StringBuilder wordState;
+    private  int           wrongGuesses;
+    private  int           score;
     
     /* Model constructor*/
     public Hangman(GameView view, Keyboard controller, GameScreen game) {
@@ -61,7 +61,6 @@ public class Hangman {
     
     /*Updates game state based upon letter guessed*/
     public void update(String buttonText) {
-        
         if(guessWord.contains(buttonText)){ // If the word contains the guessed letter
             int index = 0;
             while(index > -1){              // Fill in all instances of that letter 
@@ -95,14 +94,15 @@ public class Hangman {
         }
     }
     
-    /* Adds action listeners to our virtual keyboard*/
+    /* Adds action listeners to our controller buttons*/
     private void addActionListenersToControllerButtons() {
-        
+        // Add action listener for skip button
         controller.getSkipButton().addActionListener((ActionEvent e) ->{
             score = 0;
             endGame(score);
         });
         
+        // Add action listeners to virtual keyboard
         for (JButton button : controller.keyList) {
             button.addActionListener((ActionEvent e) -> {
                 update(button.getText());
@@ -110,7 +110,4 @@ public class Hangman {
             });
         }
     }
-    
-    
-    
 }
