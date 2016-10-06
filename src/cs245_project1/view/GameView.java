@@ -13,10 +13,13 @@ import cs245_project1.controller.Keyboard;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Graphics;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,6 +28,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.Timer;
 
 /**
@@ -34,6 +38,7 @@ public class GameView extends JPanel {
     
     /* --- Constants --- */
     private final Keyboard controller;
+    private final int      HANGMAN_STATES = 7;
     
     /* --- Variables --- */
     private JPanel hangmanPanel;
@@ -42,10 +47,12 @@ public class GameView extends JPanel {
     private JPanel manPanel;
     private JPanel wordPanel;
     private JLabel scoreLabel;
+    private JTextArea manBuffer;
     private JLabel headerLabel;
     private JLabel clockTextArea;
     private JButton skipButton;
     
+    private String [] hangmanParts;
     private LinkedList <JLabel> currentWordList;
     private String currentWord;
     private DateFormat dateFormat;
@@ -68,6 +75,7 @@ public class GameView extends JPanel {
         currentWord = wordState;
         updateScore(Integer.toString(score));
         updateWord();
+        drawNoose(wrongGuesses);
     }
     
 
@@ -96,9 +104,35 @@ public class GameView extends JPanel {
     }
     
     private void createHangmanPanel() {
+        String hangmanFile    = "src//cs245_project1//resources//noose";
+        String hangmanFileExt = ".txt";
+        hangmanParts = new String[HANGMAN_STATES];
+        for(int ii = 0; ii < HANGMAN_STATES; ii++){
+            hangmanParts[ii] = "";
+            String hangmanSrcFile = hangmanFile + ii + hangmanFileExt;
+            try {
+                BufferedReader bReader = new BufferedReader(new FileReader(hangmanSrcFile));
+                String line = bReader.readLine();
+                System.out.println("" + line);
+                while (line != null) {
+                    hangmanParts[ii] += line + "\n";
+                    line = bReader.readLine();
+                }
+                bReader.close();
+            } 
+            catch (IOException e) { 
+                System.out.println("Could Not Read File."); 
+            }
+        }
+        
         hangmanPanel = new JPanel();
         manPanel     = new JPanel();
-        drawNoose();
+        manBuffer = new JTextArea();
+        Font font = new Font("MONOSPACED",Font.PLAIN,5);
+        manBuffer.setFont(font);
+        manBuffer.setColumns(75);
+        drawNoose(0);
+        manPanel.add(manBuffer);
         hangmanPanel.setBorder(BorderFactory.createLineBorder(Color.black));
         hangmanPanel.setLayout(new BorderLayout());
         hangmanPanel.add(manPanel,BorderLayout.CENTER);
@@ -125,13 +159,8 @@ public class GameView extends JPanel {
         clockTextArea = new JLabel(dateFormat.format(new Date()));
     }
     
-    private void drawNoose() {
-
-    }
-    
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        
+    private void drawNoose(int wrongGuessCount) {
+        manBuffer.setText(hangmanParts[wrongGuessCount]);
     }
     
     private void createWordPanel() {
