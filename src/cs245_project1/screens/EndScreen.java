@@ -9,6 +9,7 @@
 ****************************************************************/
 package cs245_project1.screens;
 
+import cs245_project1.view.MainScreen;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -58,6 +59,8 @@ public class EndScreen  extends JFrame {
     private void addActionListenersToEndButton() {
         endGameButton.addActionListener((ActionEvent e) ->{
             System.out.println("ENDGAME should set main menu visibility to true here");
+            new MainFrame();
+            dispose();
         });
     }
 }
